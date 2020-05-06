@@ -42,6 +42,8 @@ public class UserService {
 				.senderEmail(user.getSenderEmail())
 				.senderPassword(user.getSenderPassword())
 				.receiverEmail(user.getRecieverEmail())
+				.senderMobile(user.getSenderMobile())
+				.recieverMobile(user.getRecieverMobile())
 				.build();
 	}
 }
