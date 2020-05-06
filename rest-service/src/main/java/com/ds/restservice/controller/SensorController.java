@@ -71,7 +71,7 @@ public class SensorController {
 	 */
 	@ApiOperation(value = "update sensor status")
 	@PutMapping("/{id}")
-	public SensorResponseDto update(
+	public SensorResponseDto updateStatus(
 			@ApiParam(name = "id") @PathVariable String id,
 			@RequestBody SensorRequestDto request) {
 		
