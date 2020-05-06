@@ -34,6 +34,12 @@ public class UserResponseDto {
 	@JsonProperty(value = "sender_password")
 	private String senderPassword;
 	
+	@JsonProperty("sender_mobile")
+	private String senderMobile;
+	
+	@JsonProperty("receiver_mobile")
+	private String recieverMobile;
+	
 	@JsonProperty(value = "error_code")
 	private Integer errorCode;
 }

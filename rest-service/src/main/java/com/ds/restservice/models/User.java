@@ -34,6 +34,12 @@ public class User {
 	@Field("sender_password")
 	private String senderPassword;
 	
+	@Field("sender_mobile")
+	private String senderMobile;
+	
+	@Field("receiver_mobile")
+	private String recieverMobile;
+	
 	
 	
 }
