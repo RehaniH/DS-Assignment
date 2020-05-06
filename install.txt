@@ -17,3 +17,10 @@
 03)Sensor application 
 -Run Rest Api as Java application first.
 -Run Sensorapp.java as java application.
+
+
+04)Desktop Application
+-Start the rmi registry
+-Run the SensorServiceProvider as Java application
+-Run the ClientFrame as Java application
+-use "admin516" as password for admin login
