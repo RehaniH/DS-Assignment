@@ -14,3 +14,6 @@
 -then the web client will run on port 3000 by default.
 -go to the google chrome browser and type http://localhost:3000/  and press enter.
 
+03)Sensor application 
+-Run Rest Api as Java application first.
+-Run Sensorapp.java as java application.
