@@ -122,4 +122,22 @@ public class SensorController {
 		}
 		
 	}
+	
+	/**
+	 * Get all active sensor information
+	 * @return
+	 */
+	@ApiOperation(value = "get all active sensor information")
+	@GetMapping("/active")
+	public List<SensorResponseDto> readAllByActive() {
+		
+		List<SensorResponseDto> responseList = null;
+		try {
+			responseList = this.sensorService.getAllByActive();
+			return responseList;
+		} catch (Exception e) {
+			return null;
+		}
+		
+	}
 }

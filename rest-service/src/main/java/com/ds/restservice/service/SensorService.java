@@ -152,6 +152,27 @@ public class SensorService {
 	}
 	
 	/**
+	 * Retreive all active sensor information from the database
+	 * @return
+	 */
+	public List<SensorResponseDto> getAllByActive() {
+		
+		List<Sensor> sensors = this.sensorRepository.findByActive(true);
+		List<SensorResponseDto> responseList = new ArrayList<>();
+		
+		
+		for (Sensor sensor : sensors) {
+			SensorResponseDto sensorResponseDto = buildSensorResponseDto(sensor);
+			LocationResponseDto locationReponseDto = buildLocationReponseDto(sensor.getLocation());
+			sensorResponseDto.setLocation(locationReponseDto);
+			responseList.add(sensorResponseDto);
+		}
+		
+		return responseList;
+		
+	}
+	
+	/**
 	 * Get sensor information by sensor id
 	 * @param id
 	 * @return
