@@ -16,11 +16,23 @@ import lombok.Setter;
 public class UserResponseDto {
 
 
+	@JsonProperty(value = "id")
 	private String id;
+	
+	@JsonProperty(value = "username")
 	private String username;
+	
+	@JsonProperty(value = "password")
 	private String password;
-	private String email;
-	private String mobile;
+	
+	@JsonProperty(value = "sender_email")
+	private String senderEmail;
+	
+	@JsonProperty(value = "receiver_email")
+	private String receiverEmail;
+	
+	@JsonProperty(value = "sender_password")
+	private String senderPassword;
 	
 	@JsonProperty(value = "error_code")
 	private Integer errorCode;

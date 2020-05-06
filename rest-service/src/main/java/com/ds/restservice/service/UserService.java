@@ -15,6 +15,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	/***
+	 * Retrieve user information by username
+	 * @param username
+	 * @return
+	 * @throws Exception
+	 */
 	public UserResponseDto findByUsername(String username) throws Exception {
 		
 		Optional<User> user = this.userRepository.findByUsername(username);
@@ -27,13 +33,15 @@ public class UserService {
 		return response;
 	}
 
+	//build UserResponseDto from User Entity Object
 	private UserResponseDto buildUserResponseDto(User user) {
 		return UserResponseDto.builder()
 				.id(user.getId())
 				.username(user.getUsername())
 				.password(user.getPassword())
-				.email(user.getEmail())
-				.mobile(user.getMobile())
+				.senderEmail(user.getSenderEmail())
+				.senderPassword(user.getSenderPassword())
+				.receiverEmail(user.getRecieverEmail())
 				.build();
 	}
 }
