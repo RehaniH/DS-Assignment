@@ -112,7 +112,7 @@ public class SensorService {
 	 * @return
 	 * @throws Exception
 	 */
-	public SensorResponseDto updateStatus(SensorRequestDto req, String id) throws Exception {
+	public SensorResponseDto updateStatus(String id, int co2, int smoke) throws Exception {
 
 		Optional<Sensor> sensorOpt = this.sensorRepository.findById(id);
 
@@ -120,8 +120,8 @@ public class SensorService {
 			throw new Exception();
 		}
 		Sensor sensor = sensorOpt.get();
-		sensor.setCo2Level(req.getCo2Level());
-		sensor.setSmokeLevel(req.getSmokeLevel());
+		sensor.setCo2Level(co2);
+		sensor.setSmokeLevel(smoke);
 		
 		Sensor savedSensor = this.sensorRepository.save(sensor);
 		SensorResponseDto reponseDto = buildSensorResponseDto(savedSensor);
