@@ -16,7 +16,7 @@ import java.util.TimerTask;
 public class ClientFrame extends JFrame implements ActionListener {
 	
 	/**
-	 * 
+	 * A comment added
 	 */
 	private static final long serialVersionUID = 1L;
 	
