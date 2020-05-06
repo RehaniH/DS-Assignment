@@ -20,6 +20,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	/***
+	 * Get user details by username
+	 * @param username
+	 * @return
+	 */
 	@ApiOperation(value = "Get user details from username")
 	@GetMapping("/{username}")
 	public UserResponseDto findByUsername(@ApiParam(name = "username")

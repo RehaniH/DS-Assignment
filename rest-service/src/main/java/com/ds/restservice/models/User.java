@@ -3,6 +3,7 @@ package com.ds.restservice.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,10 +20,19 @@ public class User {
 
 	@Id
 	private String id;
+	
 	private String username;
+	
 	private String password;
-	private String email;
-	private String mobile;
+	
+	@Field("sender_email")
+	private String senderEmail;
+	
+	@Field("receiver_email")
+	private String recieverEmail;
+	
+	@Field("sender_password")
+	private String senderPassword;
 	
 	
 	

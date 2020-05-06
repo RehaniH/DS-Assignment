@@ -24,16 +24,24 @@ public class SensorService {
 	@Autowired
 	private LocationService locationService;
 
+	/**
+	 * register new sensor
+	 * @param req
+	 * @return
+	 */
 	public SensorResponseDto register(LocationRequestDto req) {
 
 		int floorNo = req.getFloorNo();
 		int roomNo = req.getRoomNo();
 		Location location;
+		
+		//check if the location provided already exists in the database 
 		Optional<Location> locationOpt = this.locationService.findByRoomNoAndFloor(roomNo, floorNo);
 
 		if(locationOpt.isPresent()) {
 			location = locationOpt.get();
 		}else {
+			//create new location object with room no and floor no
 			LocationResponseDto createdLocation = this.locationService.create(req);
 			location = getLocationObject(createdLocation);
 		}
@@ -51,7 +59,14 @@ public class SensorService {
 
 
 
-
+	/**
+	 * Update sensor information and related location information (room no and floor no)
+	 * @param req
+	 * @param id
+	 * @param locationId
+	 * @return
+	 * @throws Exception
+	 */
 	public SensorResponseDto update(SensorRequestDto req, String id, String locationId) throws Exception {
 
 		Optional<Sensor> sensorOpt = this.sensorRepository.findById(id);
@@ -65,16 +80,22 @@ public class SensorService {
 
 		if(req.getLocation() != null) {
 			LocationRequestDto locationRequest = req.getLocation();
+			
+			//check if the location provided already exists in the database 
 			Optional<Location> locationCheck = 
 					this.locationService.findByRoomNoAndFloor(locationRequest.getRoomNo(), locationRequest.getFloorNo());
+			
+			
 			if(locationCheck.isPresent()) {
 				location = locationCheck.get();
 			}else {
+				//update existing location object with the new information provided
 				LocationResponseDto updatedLocation = this.locationService.update(locationRequest, locationId);
 				location = getLocationObject(updatedLocation);
 			}
 		}
 
+		//sensor is set active by default
 		sensor.setActive(req.getActive());
 		sensor.setLocation(location != null ? location : sensor.getLocation());
 		Sensor savedSensor = this.sensorRepository.save(sensor);
@@ -84,7 +105,13 @@ public class SensorService {
 		return reponseDto;
 	}
 
-
+	/**
+	 * Update sensor status by sensor id, i.e Carbon dioxide and smoke levels of a particular sensor
+	 * @param req
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public SensorResponseDto updateStatus(SensorRequestDto req, String id) throws Exception {
 
 		Optional<Sensor> sensorOpt = this.sensorRepository.findById(id);
@@ -103,6 +130,10 @@ public class SensorService {
 		return reponseDto;
 	}
 
+	/**
+	 * Retreive all sensor information from the database
+	 * @return
+	 */
 	public List<SensorResponseDto> getAll() {
 		
 		List<Sensor> sensors = this.sensorRepository.findAll();
@@ -120,6 +151,12 @@ public class SensorService {
 		
 	}
 	
+	/**
+	 * Get sensor information by sensor id
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public SensorResponseDto getById(String id) throws Exception {
 		Optional<Sensor> optional = this.sensorRepository.findById(id);
 		
@@ -134,6 +171,7 @@ public class SensorService {
 		
 	}
 
+	// get a Location object from LocationResponseDto
 	private Location getLocationObject(LocationResponseDto createdLocation) {
 		Location location = new Location();
 		location.setId(createdLocation.getId());
@@ -142,7 +180,7 @@ public class SensorService {
 		return location;
 	}
 
-
+	// builds a Sensor response DTO 
 	private SensorResponseDto buildSensorResponseDto(Sensor savedSensor) {
 		return SensorResponseDto.builder()
 				.id(savedSensor.getId())
@@ -152,6 +190,7 @@ public class SensorService {
 				.build();
 	}
 
+	// builds a Location response DTO 
 	private LocationResponseDto buildLocationReponseDto(Location location) {
 
 		return LocationResponseDto.builder()

@@ -18,6 +18,11 @@ public class LocationService {
 	@Autowired
 	private LocationRepository locationRepository;
 
+	/**
+	 * Create new location providing room no and floor no
+	 * @param req
+	 * @return
+	 */
 	public LocationResponseDto create(LocationRequestDto req) {
 
 		Location location = new Location();
@@ -28,7 +33,13 @@ public class LocationService {
 		return reponseDto;
 	}
 
-
+	/**
+	 * Update location information by location id
+	 * @param req
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public LocationResponseDto update(LocationRequestDto req, String id) throws Exception {
 
 		Optional<Location> locationOpt = this.locationRepository.findById(id);
@@ -45,6 +56,12 @@ public class LocationService {
 		return reponseDto;
 	}
 	
+	/**
+	 * Get location object by Id
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public LocationResponseDto getById(String id) throws Exception {
 		
 		Optional<Location> locationOpt = this.locationRepository.findById(id);
@@ -59,7 +76,12 @@ public class LocationService {
 		locationResponseDto.setRoomNo(location.getRoomNo());
 		return locationResponseDto;
 	}
-	
+	/**
+	 * Find location details by roomNo and floor no
+	 * @param roomNo
+	 * @param floorNo
+	 * @return
+	 */
 	public Optional<Location> findByRoomNoAndFloor(int roomNo, int floorNo) {
 		
 		Optional<Location> location = this.locationRepository.findByRoomNoAndFloorNo(roomNo, floorNo);
@@ -67,6 +89,10 @@ public class LocationService {
 		
 	}
 	
+	/**
+	 * Retreive all location information
+	 * @return
+	 */
 	public List<LocationResponseDto> getAll(){
 		List<LocationResponseDto> reponseList = new ArrayList<>();
 		List<Location> locations = this.locationRepository.findAll();
@@ -80,7 +106,7 @@ public class LocationService {
 		
 	}
 
-
+	//build LocationResponseDto from Location entity object
 	private LocationResponseDto buildLocationReponseDto(Location location) {
 		
 		return LocationResponseDto.builder()

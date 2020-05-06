@@ -26,7 +26,11 @@ public class SensorController {
 
 	@Autowired
 	private SensorService sensorService;
-	
+	/**
+	 * Register a new sensor 
+	 * @param request
+	 * @return
+	 */
 	@ApiOperation(value = "create new sensor")
 	@PostMapping
 	public SensorResponseDto register(@RequestBody LocationRequestDto request) {
@@ -35,6 +39,13 @@ public class SensorController {
 		return responseDto;
 	}
 	
+	/***
+	 * update sensor information 
+	 * @param location_id
+	 * @param id
+	 * @param request
+	 * @return
+	 */
 	@ApiOperation(value = "update sensor information")
 	@PutMapping("/{id}/locations/{location_id}")
 	public SensorResponseDto update(
@@ -52,6 +63,12 @@ public class SensorController {
 		return responseDto;
 	}
 	
+	/**
+	 * Update sensor status
+	 * @param id
+	 * @param request
+	 * @return
+	 */
 	@ApiOperation(value = "update sensor status")
 	@PutMapping("/{id}")
 	public SensorResponseDto update(
@@ -68,7 +85,11 @@ public class SensorController {
 		return responseDto;
 	}
 	
-	
+	/**
+	 * Get sensor details by id
+	 * @param id
+	 * @return
+	 */
 	@ApiOperation(value = "get sensor details by id")
 	@GetMapping("/{id}")
 	public SensorResponseDto getById(
@@ -84,7 +105,10 @@ public class SensorController {
 		return responseDto;
 	}
 	
-	
+	/**
+	 * Get all sensor information
+	 * @return
+	 */
 	@ApiOperation(value = "get all sensor information")
 	@GetMapping
 	public List<SensorResponseDto> readAll() {
