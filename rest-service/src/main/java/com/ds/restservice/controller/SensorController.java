@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ import com.ds.restservice.service.SensorService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-@RestController
+@RestController @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("v1/sensors")
 public class SensorController {
 
@@ -70,14 +71,15 @@ public class SensorController {
 	 * @return
 	 */
 	@ApiOperation(value = "update sensor status")
-	@PutMapping("/{id}")
+	@PutMapping("/{id}/co2/{co2}/smoke/{smoke}")
 	public SensorResponseDto updateStatus(
 			@ApiParam(name = "id") @PathVariable String id,
-			@RequestBody SensorRequestDto request) {
+			@ApiParam(name = "co2") @PathVariable Integer co2,
+			@ApiParam(name = "smoke") @PathVariable Integer smoke) {
 		
 		SensorResponseDto responseDto = null;
 		try {
-			responseDto = this.sensorService.updateStatus(request, id);
+			responseDto = this.sensorService.updateStatus(id, co2, smoke);
 		} catch (Exception e) {
 			responseDto = new SensorResponseDto();
 			responseDto.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.ordinal());
