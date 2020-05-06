@@ -7,5 +7,10 @@
 - Run RestServiceApplication.java file as a java application file.
 - Rest service will then run on port 8080 by default.
 
+02)Web Client:
 
+-open the ds project from web storm .
+-go to the console and type npm start and press enter.
+-then the web client will run on port 3000 by default.
+-go to the google chrome browser and type http://localhost:3000/  and press enter.
 
